@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Student Dashboard</h1>
+    <nav>
+      <button id="logout">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="student-info">
+      <h2>My Information</h2>
+      <div id="info-container">
+        <!-- 学生信息将在这里动态加载 -->
+      </div>
+    </section>
+
+    <section id="grades-section">
+      <h2>My Grades</h2>
+      <table id="grades-table">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Grade</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 成绩数据将在这里动态加载 -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="../js/student.js"></script>
+</body>
+</html>

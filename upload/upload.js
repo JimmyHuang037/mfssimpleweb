@@ -12,7 +12,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
   const formData = new FormData();
   formData.append('file', file);
 
-  fetch('http://localhost:5000/api/import', {
+  fetch('http://localhost:5000/api/upload/import', {
     method: 'POST',
     body: formData
   })
@@ -27,7 +27,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     if (data.status === 'success') {
       document.getElementById('message').innerText = data.message + '，即将跳转...';
       setTimeout(() => {
-        window.location.href = '../html/index.html';
+        window.location.href = '/admin/admin.html';
       }, 1500);
     } else {
       document.getElementById('message').innerText = '❌ 上传失败: ' + (data.error || '未知错误');

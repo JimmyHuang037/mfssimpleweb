@@ -1,0 +1,23 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+  <h2>Login Form</h2>
+  <form id="login-form">
+    <label for="username">Student ID / Admin:</label><br>
+    <input type="text" id="username" name="username"><br> <!--type是文本输入框-id给前端用，name给后端调用--->
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br><br><!--password把输入全部转换为*-->>
+    <input type="submit" value="Login">
+  </form>
+
+  <!-- 错误提示信息 -->
+  <p id="error-msg" style="color: red; display: none;"></p>
+<script src="login.js"></script>
+</body>
+</html>

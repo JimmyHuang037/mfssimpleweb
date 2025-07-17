@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // 检查是否是admin登录
     if (student_id === 'admin' && password === 'admin') {
-      window.location.href = 'html/index.html';
+      window.location.href = '/admin/admin.html';
     } else {
       login(student_id, password);
     }
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // 学生登录函数
   async function login(student_id, password) {
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('http://localhost:5000/api/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const data = await response.json();
       if (data.success) {
-        window.location.href = `html/student.html?student_id=${student_id}`;
+        window.location.href = `/student/student.html?student_id=${student_id}`;
       } else {
         errorMsg.textContent = data.message || '用户名或密码错误';
         errorMsg.style.display = 'block';
@@ -43,3 +43,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
+
+

@@ -115,3 +115,18 @@ tr:hover td {
     红 #e94560  蓝 #0f3460  黄 #ffd700  黑 #222831
     白 #f5f6fa  紫 #7c3aed  粉 #ff6f91  青 #00cfff 橙 #ffb347
 */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 10px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="submit"] {
+  margin-top: 10px;
+}

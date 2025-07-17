@@ -12,7 +12,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
   const formData = new FormData();
   formData.append('file', file);
 
-  fetch('http://localhost:5000/import', {
+  fetch('http://localhost:5000/api/import', {
     method: 'POST',
     body: formData
   })

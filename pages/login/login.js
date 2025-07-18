@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // 检查是否是admin登录
     if (student_id === 'admin' && password === 'admin') {
-      window.location.href = '/admin/admin.html';
+      window.location.href = '/pages/admin/admin.html';
     } else {
       login(student_id, password);
     }
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const data = await response.json();
       if (data.success) {
-        window.location.href = `/student/student.html?student_id=${student_id}`;
+        window.location.href = `/pages/student/student.html?student_id=${student_id}`;
       } else {
         errorMsg.textContent = data.message || '用户名或密码错误';
         errorMsg.style.display = 'block';

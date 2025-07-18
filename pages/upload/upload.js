@@ -27,7 +27,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
     if (data.status === 'success') {
       document.getElementById('message').innerText = data.message + '，即将跳转...';
       setTimeout(() => {
-        window.location.href = '/admin/admin.html';
+        window.location.href = '/pages/admin/admin.html';
       }, 1500);
     } else {
       document.getElementById('message').innerText = '❌ 上传失败: ' + (data.error || '未知错误');

@@ -1,30 +1,32 @@
 # SimpleWeb 学生信息管理系统
 
-## 项目简介
-SimpleWeb 是一个极简风格的学生信息管理前端项目。
-主页为登录页面，输入admin/admin进入管理员界面。
-输入有效学号和密码，进入学生界面。
+## 项目概述
+SimpleWeb 是一个极简风格的学生信息管理前端项目，提供登录、学生信息管理、成绩管理等功能。用户可通过登录页面，使用管理员账号或学生学号及密码登录，进入不同的操作界面。
 
 ## 项目结构
+
 ```
 .
-├── admin/          # 管理员界面相关文件
-│   ├── admin.html  # 管理员主界面
-│   └── admin.js    # 管理员界面功能实现
-├── css/            # 样式文件
-│   └── style.css   # 主样式表
-├── login/          # 登录界面相关文件
-│   ├── login.html  # 登录页面
-│   └── login.js    # 登录功能实现
-├── student/        # 学生界面相关文件
-│   ├── student.html# 学生主界面
-│   └── student.js  # 学生界面功能实现
-├── upload/         # 文件上传相关文件
-│   ├── upload.html # 文件上传页面
-│   └── upload.js   # 文件上传功能实现
-├── README.md       # 项目说明文档
-└── index.html      # 项目入口文件
-```
+├── assets/                 # 静态资源
+│   ├── fonts/              # 字体文件
+│   ├── icons/              # 图标资源
+│   └── images/             # 图片资源
+├── pages/
+│   ├── admin/              # 管理员模块
+│   │   ├── admin.html      # 管理界面
+│   │   └── admin.js        # 学生管理逻辑
+│   ├── login/              # 登录模块
+│   │   ├── login.html      # 登录页
+│   │   ├── login.css       # 登录样式
+│   │   └── login.js        # 认证逻辑
+│   ├── student/            # 学生模块
+│   │   ├── student.html    # 学生主页
+│   │   └── student.js      # 成绩查询
+│   └── upload/             # 文件上传
+│       ├── upload.html     # 上传页
+│       └── upload.js       # 导入逻辑
+├── style.css               # 全局样式
+└── index.html              # 入口页```
 
 ## 功能描述
 
@@ -49,3 +51,9 @@ SimpleWeb 是一个极简风格的学生信息管理前端项目。
 - 使用Fetch API进行前后端通信
 - 表单验证和错误处理
 - 动态页面跳转和内容加载
+
+GET /api/students/          // 获取所有学生
+GET /api/students/{id}      // 获取单个学生
+POST /api/students/         // 添加学生
+POST /api/login/ 
+请求体: {student_id, password}

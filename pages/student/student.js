@@ -30,7 +30,7 @@ async function loadStudentData() {
       fetch('http://localhost:5000/logout', {
         method: 'POST'
       }).then(() => {
-        window.location.href = '/login/login.html';
+        window.location.href = '/pages/login/login.html';
       });
     });
 

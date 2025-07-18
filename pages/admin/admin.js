@@ -27,7 +27,7 @@ window.onload = function() {
     var uploadButton = document.createElement('button');
     uploadButton.innerHTML = 'Upload';
     uploadButton.onclick = function() {
-        window.location.href = '/upload/upload.html';
+        window.location.href = '/pages/upload/upload.html';
     };
 
     // 创建 Logout 按钮
@@ -36,7 +36,7 @@ window.onload = function() {
     logoutButton.onclick = function() {
         // 清除登录状态逻辑，比如清除 localStorage/token
         // 这里简单跳转回登录页
-        window.location.href = '/login/login.html';
+        window.location.href = '/pages/login/login.html';
     };
 
     // 将按钮添加到页面顶部，先添加 Logout，再添加 Upload，使得 Upload 在左，Logout 在右（也可以调整）

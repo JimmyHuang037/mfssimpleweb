@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "msedge",
+      "request": "launch",
+      "name": "Edge 内嵌调试",
+      "url": "http://localhost:5500",
+      "webRoot": "${workspaceFolder}",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}

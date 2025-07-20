@@ -1,20 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>导入学生信息</title>
-  <link rel="stylesheet" href="/style.css">
-  <script src="/assets/libs/jquery/jquery.min.js"></script>
-</head>
-<body>
-  <h1>上传 Excel 文件导入学生信息</h1>
-  <form id="uploadForm">
-    <input type="file" id="fileInput" name="file" accept=".xlsx,.xls" required>
-    <br>
-    <button type="submit">上传</button>
-  </form>
+  <head>
+    <meta charset="UTF-8" />
+    <title>导入学生信息</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/assets/libs/jquery/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>上传 Excel 文件导入学生信息</h1>
+    <form id="uploadForm">
+      <input
+        type="file"
+        id="fileInput"
+        name="file"
+        accept=".xlsx,.xls"
+        required
+      />
+      <br />
+      <button type="submit">上传</button>
+    </form>
 
-  <div id="message" style="margin-top: 20px; color: green;"></div>
+    <div id="message" style="margin-top: 20px; color: green"></div>
 
-  <script type="module" src="./upload.js"></script>
-</body>
+    <script type="module" src="./upload.js"></script>
+  </body>
+</html>

@@ -33,7 +33,7 @@ const AdminModule = {
       .getElementById("upload-btn")
       .addEventListener(
         "click",
-        () => (window.location.href = "/pages/upload/upload.html")
+        () => (window.location.href = "/pages/upload/upload.html"),
       );
 
     document
@@ -42,7 +42,7 @@ const AdminModule = {
 
     this.elements.searchInput.addEventListener(
       "input",
-      this.handleSearch.bind(this)
+      this.handleSearch.bind(this),
     );
   },
 
@@ -80,7 +80,7 @@ const AdminModule = {
     const filtered = this.students.filter(
       (student) =>
         student.name.toLowerCase().includes(term) ||
-        student.id.toString().includes(term)
+        student.id.toString().includes(term),
     );
     this.renderStudents(filtered);
   },

@@ -1,12 +1,12 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = "http://localhost:5000/api";
 
 class ApiService {
   // 用户认证
   static async login(credentials) {
     const response = await fetch(`${API_BASE}/login/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
     });
     return this._handleResponse(response);
   }
@@ -25,10 +25,10 @@ class ApiService {
   // 文件上传
   static async uploadFile(file) {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
     const response = await fetch(`${API_BASE}/upload/import`, {
-      method: 'POST',
-      body: formData
+      method: "POST",
+      body: formData,
     });
     return this._handleResponse(response);
   }

@@ -1,78 +1,85 @@
 /* 登录窗口样式 */
 .login-window {
-    background-color: var(--spidey-black);
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px var(--spidey-pink);
-    width: 100%;
-    max-width: 400px;
-    height: 60vh;
-    margin: 0 auto;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--spidey-black);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--spidey-pink);
+  width: 100%;
+  max-width: 400px;
+  height: 60vh;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-window h2 {
-    color: var(--spidey-yellow);
-    text-align: center;
-    margin-bottom: 20px;
-    text-shadow: 0 0 8px var(--spidey-yellow), 0 0 4px var(--spidey-pink);
+  color: var(--spidey-yellow);
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow:
+    0 0 8px var(--spidey-yellow),
+    0 0 4px var(--spidey-pink);
 }
 
 .login-window label {
-    display: block;
-    margin: 15px 0 5px;
-    color: var(--spidey-white);
-    font-weight: bold;
+  display: block;
+  margin: 15px 0 5px;
+  color: var(--spidey-white);
+  font-weight: bold;
 }
 
 .login-window input[type="text"],
 .login-window input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    font-size: 14px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
 }
 
 .login-window input[type="submit"] {
-    width: 100%;
-    padding: 8px;
-    background-color: var(--spidey-red);
-    border: none;
-    border-radius: 6px;
-    color: var(--spidey-white);
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  padding: 8px;
+  background-color: var(--spidey-red);
+  border: none;
+  border-radius: 6px;
+  color: var(--spidey-white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .login-window input[type="submit"]:hover {
-    background-color: var(--spidey-pink);
+  background-color: var(--spidey-pink);
 }
 
 .login-window #error-msg {
-    color: var(--spidey-red);
-    text-align: center;
-    margin-top: 15px;
+  color: var(--spidey-red);
+  text-align: center;
+  margin-top: 15px;
 }
 
 body {
-    font-family: 'Bangers', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background: radial-gradient(circle at 60% 20%, var(--spidey-pink) 0%, var(--spidey-blue) 40%, var(--spidey-purple) 100%);
-    color: var(--spidey-white);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    animation: bgmove 12s infinite alternate linear;
-    position: relative;
-    overflow-x: hidden;
+  font-family: "Bangers", "Segoe UI", "Roboto", "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: radial-gradient(
+    circle at 60% 20%,
+    var(--spidey-pink) 0%,
+    var(--spidey-blue) 40%,
+    var(--spidey-purple) 100%
+  );
+  color: var(--spidey-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: bgmove 12s infinite alternate linear;
+  position: relative;
+  overflow-x: hidden;
 }

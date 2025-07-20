@@ -1,4 +1,4 @@
-import ApiService from '../../services/api-service.js';
+import ApiService from "../../services/api-service.js";
 
 const StudentModule = {
   async init() {
@@ -9,18 +9,21 @@ const StudentModule = {
   },
 
   getStudentId() {
-    return new URLSearchParams(window.location.search).get('student_id');
+    return new URLSearchParams(window.location.search).get("student_id");
   },
 
   cacheElements() {
     this.elements = {
-      gradesTable: document.getElementById('grades-table'),
-      logoutBtn: document.getElementById('logout')
+      gradesTable: document.getElementById("grades-table"),
+      logoutBtn: document.getElementById("logout"),
     };
   },
 
   setupEventListeners() {
-    this.elements.logoutBtn.addEventListener('click', this.handleLogout.bind(this));
+    this.elements.logoutBtn.addEventListener(
+      "click",
+      this.handleLogout.bind(this),
+    );
   },
 
   async loadData() {
@@ -28,13 +31,14 @@ const StudentModule = {
       const student = await ApiService.getStudent(this.studentId);
       this.renderGrades(student.scores);
     } catch (error) {
-      this.showError('加载成绩失败');
+      this.showError("加载成绩失败");
     }
   },
 
   renderGrades(scores = []) {
-    this.elements.gradesTable.querySelector('tbody').innerHTML = 
-      scores.map(score => this.createGradeRow(score)).join('');
+    this.elements.gradesTable.querySelector("tbody").innerHTML = scores
+      .map((score) => this.createGradeRow(score))
+      .join("");
   },
 
   createGradeRow(score) {
@@ -47,9 +51,9 @@ const StudentModule = {
   },
 
   handleLogout() {
-    sessionStorage.removeItem('authToken');
-    window.location.href = '/pages/login/login.html';
-  }
+    sessionStorage.removeItem("authToken");
+    window.location.href = "/pages/login/login.html";
+  },
 };
 
-document.addEventListener('DOMContentLoaded', () => StudentModule.init());
+document.addEventListener("DOMContentLoaded", () => StudentModule.init());

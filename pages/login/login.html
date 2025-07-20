@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="login.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
     <div class="login-window">
-        <h2>Login Form</h2>
-        <form id="login-form">
-            <label for="username">Student ID / Admin:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your student ID or admin" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            <input type="submit" value="Login">
-        </form>
-        <p id="error-msg" style="color: red; display: none;"></p>
+      <h2>Login Form</h2>
+      <form id="login-form">
+        <label for="username">Student ID / Admin:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your student ID or admin"
+          required
+        />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+        <input type="submit" value="Login" />
+      </form>
+      <p id="error-msg" style="color: red; display: none"></p>
     </div>
-    <script src="login.js" defer></script>
-</body>
+    <script type="module" src="./login.js"></script>
+  </body>
 </html>

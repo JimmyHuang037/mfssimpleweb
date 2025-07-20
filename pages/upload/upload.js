@@ -1,40 +1,59 @@
-document.getElementById('uploadForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // 防止表单刷新页面
+import ApiService from '../../services/api-service.js';
 
-  const fileInput = document.getElementById('fileInput');
-  const file = fileInput.files[0];
+const UploadModule = {
+  async init() {
+    this.cacheElements();
+    this.setupEventListeners();
+  },
 
-  if (!file) {
-    alert("❌ 选一个文件！");
-    return;
+  cacheElements() {
+    this.elements = {
+      form: document.getElementById('uploadForm'),
+      fileInput: document.getElementById('fileInput'),
+      message: document.getElementById('message')
+    };
+  },
+
+  setupEventListeners() {
+    this.elements.form.addEventListener('submit', this.handleSubmit.bind(this));
+  },
+
+  async handleSubmit(e) {
+    e.preventDefault();
+    if (!this.validateFile()) return;
+    
+    try {
+      this.showMessage('上传中...', 'loading');
+      const data = await ApiService.uploadFile(this.elements.fileInput.files[0]);
+      this.handleUploadSuccess(data);
+    } catch (err) {
+      this.showMessage(`上传失败: ${err.message}`, 'error');
+    }
+  },
+
+  validateFile() {
+    const file = this.elements.fileInput.files[0];
+    if (!file) {
+      this.showMessage('请选择文件', 'error');
+      return false;
+    }
+    return true;
+  },
+
+  handleUploadSuccess(data) {
+    this.showMessage(`${data.message}，即将跳转...`, 'success');
+    setTimeout(() => {
+      window.location.href = '/pages/admin/admin.html';
+    }, 1500);
+  },
+
+  showMessage(message, type) {
+    this.elements.message.textContent = message;
+    this.elements.message.style.color = 
+      type === 'error' ? 'var(--spidey-red)' : 
+      type === 'success' ? 'var(--spidey-cyan)' : 
+      'var(--spidey-yellow)';
   }
+};
 
-  const formData = new FormData();
-  formData.append('file', file);
-
-  fetch('http://localhost:5000/api/upload/import', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('HTTP 错误，状态码：' + response.status);
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log('✅ 服务器返回：', data);
-    if (data.status === 'success') {
-      document.getElementById('message').innerText = data.message + '，即将跳转...';
-      setTimeout(() => {
-        window.location.href = '/pages/admin/admin.html';
-      }, 1500);
-    } else {
-      document.getElementById('message').innerText = '❌ 上传失败: ' + (data.error || '未知错误');
-    }
-  })
-  .catch(err => {
-    console.error('上传失败:', err);
-    document.getElementById('message').innerText = '❌ 上传时出错: ' + err.message;
-  });
-});
+document.addEventListener('DOMContentLoaded', () => UploadModule.init());

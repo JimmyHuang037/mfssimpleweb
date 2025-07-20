@@ -1,47 +1,67 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const loginForm = document.getElementById('login-form');
-  const errorMsg = document.getElementById('error-msg');
+import ApiService from '../../services/api-service.js';
 
-  // 表单提交
-  loginForm.addEventListener('submit', function (e) {
+// 保持原有代码不变，但确保文件以模块方式加载
+const LoginModule = {
+  async init() {
+    this.cacheElements();
+    this.setupEventListeners();
+  },
+
+  cacheElements() {
+    this.elements = {
+      form: document.getElementById('login-form'),
+      username: document.getElementById('username'),
+      password: document.getElementById('password'),
+      errorMsg: document.getElementById('error-msg')
+    };
+  },
+
+  setupEventListeners() {
+    this.elements.form.addEventListener('submit', this.handleSubmit.bind(this));
+  },
+
+  async handleSubmit(e) {
     e.preventDefault();
-    const student_id = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
-    
-    // 检查是否是admin登录
-    if (student_id === 'admin' && password === 'admin') {
+    if (this.isAdminLogin()) return;
+    await this.processStudentLogin();
+  },
+
+  isAdminLogin() {
+    const { username, password } = this.elements;
+    if (username.value === 'admin' && password.value === 'admin') {
       window.location.href = '/pages/admin/admin.html';
-    } else {
-      login(student_id, password);
+      return true;
     }
-  });
+    return false;
+  },
 
-  // 学生登录函数
-  async function login(student_id, password) {
+  async processStudentLogin() {
     try {
-      const response = await fetch('http://localhost:5000/api/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ student_id, password })
-      });
-
-      if (!response.ok) throw new Error('网络错误');
-
-      const data = await response.json();
-      if (data.success) {
-        window.location.href = `/pages/student/student.html?student_id=${student_id}`;
-      } else {
-        errorMsg.textContent = data.message || '用户名或密码错误';
-        errorMsg.style.display = 'block';
-      }
+      const data = await ApiService.login(this.getCredentials());
+      this.handleLoginSuccess(data);
     } catch (err) {
-      errorMsg.textContent = '登录失败，请检查网络或服务器。';
-      errorMsg.style.display = 'block';
-      console.error('登录错误:', err);
+      this.showError(err.message);
     }
-  }
-});
+  },
 
+  getCredentials() {
+    return {
+      student_id: this.elements.username.value.trim(),
+      password: this.elements.password.value.trim()
+    };
+  },
+
+  handleLoginSuccess(data) {
+    sessionStorage.setItem('authToken', data.token);
+    const studentId = data.student?.student_id || data.student_id || data.userId;
+    window.location.href = `/pages/student/student.html?student_id=${studentId}`;
+  },
+
+  showError(message) {
+    this.elements.errorMsg.textContent = message;
+    this.elements.errorMsg.style.display = 'block';
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => LoginModule.init());
 

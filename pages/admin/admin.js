@@ -1,53 +1,94 @@
-// Fetch student data from the API and populate the table
-fetch('http://localhost:5000/api/students/')
-    .then(response => response.json())
-    .then(data => {
-        const tbody = document.querySelector('#studentTable tbody');
-        tbody.innerHTML = '';
-        data.forEach(student => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${student.id}</td>
-                <td>${student.name}</td>
-                <td>${student.password}</td>
-                <td>${student.student_id}</td>
-            `;
-            tbody.appendChild(row);
-        });
-    })
-    .catch(error => {
-        console.error('Error fetching student data:', error);
-        const tbody = document.querySelector('#studentTable tbody');
-        tbody.innerHTML = '<tr><td colspan="4">Failed to load student data.</td></tr>';
-    });
+import ApiService from "../../services/api-service.js";
 
-// 页面加载完成后执行
-window.onload = function() {
-    // 创建 Upload 按钮
-    var uploadButton = document.createElement('button');
-    uploadButton.innerHTML = 'Upload';
-    uploadButton.onclick = function() {
-        window.location.href = '/pages/upload/upload.html';
+const AdminModule = {
+  async init() {
+    this.cacheElements();
+    this.setupUI();
+    this.setupEventListeners();
+    await this.loadStudents();
+  },
+
+  cacheElements() {
+    this.elements = {
+      studentTable: document.getElementById("studentTable"),
+      searchInput: document.getElementById("search-input"),
     };
+  },
 
-    // 创建 Logout 按钮
-    var logoutButton = document.createElement('button');
-    logoutButton.innerHTML = 'Logout';
-    logoutButton.onclick = function() {
-        // 清除登录状态逻辑，比如清除 localStorage/token
-        // 这里简单跳转回登录页
-        window.location.href = '/pages/login/login.html';
-    };
+  setupUI() {
+    document.body.insertAdjacentHTML("afterbegin", this.createHeaderButtons());
+  },
 
-    // 将按钮添加到页面顶部，先添加 Logout，再添加 Upload，使得 Upload 在左，Logout 在右（也可以调整）
-    var headerDiv = document.createElement('div');
-    headerDiv.style.display = 'flex';
-    headerDiv.style.justifyContent = 'flex-start';
-    headerDiv.style.gap = '10px';
-    headerDiv.style.margin = '10px';
+  createHeaderButtons() {
+    return `
+      <div class="admin-header">
+        <button id="upload-btn">上传</button>
+        <button id="logout-btn">退出</button>
+      </div>
+    `;
+  },
 
-    headerDiv.appendChild(uploadButton);
-    headerDiv.appendChild(logoutButton);
+  setupEventListeners() {
+    document
+      .getElementById("upload-btn")
+      .addEventListener(
+        "click",
+        () => (window.location.href = "/pages/upload/upload.html")
+      );
 
-    document.body.insertBefore(headerDiv, document.body.firstChild);
+    document
+      .getElementById("logout-btn")
+      .addEventListener("click", this.handleLogout.bind(this));
+
+    this.elements.searchInput.addEventListener(
+      "input",
+      this.handleSearch.bind(this)
+    );
+  },
+
+  async loadStudents() {
+    try {
+      this.students = await ApiService.getStudents();
+      this.renderStudents(this.students);
+    } catch (error) {
+      console.error("加载学生数据失败:", error);
+    }
+  },
+
+  renderStudents(students) {
+    this.elements.studentTable.querySelector("tbody").innerHTML = students
+      .map((student) => this.createStudentRow(student))
+      .join("");
+  },
+
+  createStudentRow(student) {
+    return `
+      <tr>
+        <td>${student.id}</td>
+        <td>${student.name}</td>
+        <td>${student.class}</td>
+        <td>
+          <button class="edit-btn" data-id="${student.id}">编辑</button>
+          <button class="delete-btn" data-id="${student.id}">删除</button>
+        </td>
+      </tr>
+    `;
+  },
+
+  handleSearch(e) {
+    const term = e.target.value.toLowerCase();
+    const filtered = this.students.filter(
+      (student) =>
+        student.name.toLowerCase().includes(term) ||
+        student.id.toString().includes(term)
+    );
+    this.renderStudents(filtered);
+  },
+
+  handleLogout() {
+    sessionStorage.removeItem("authToken");
+    window.location.href = "/pages/login/login.html";
+  },
 };
+
+document.addEventListener("DOMContentLoaded", () => AdminModule.init());
